@@ -1,0 +1,7 @@
+FROM gz/monodevelop:base
+
+RUN apt-get install -y light-themes && ln -s /usr/share/themes/Radiance/gtk-2.0/gtkrc /etc/gtk-2.0/gtkrc
+
+VOLUME ["/tmp/.X11-unix", "/workspace"]
+ENTRYPOINT ["/usr/bin/monodevelop"]
+CMD ["--no-redirect"]

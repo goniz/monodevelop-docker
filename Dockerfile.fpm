@@ -1,0 +1,12 @@
+FROM gz/monodevelop:base
+
+RUN mkdir -p /pkg_root /output && make -C /code install DESTDIR=/pkg_root
+RUN apt-get update -y && apt-get install -y ruby ruby-dev
+RUN gem install fpm
+
+VOLUME ["/output"]
+WORKDIR /output
+
+ADD fpm_entrypoint.sh /
+ENTRYPOINT ["/fpm_entrypoint.sh"]
+CMD []
